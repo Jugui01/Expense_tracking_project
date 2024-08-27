@@ -6,7 +6,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # Obtenir le chemin du fichier depuis les arguments de la ligne de commande
-file_path = sys.argv[1]
+file_path = "D:\\Travail pro\\Github repo\\Expense_tracking_project\\Fichier brut exemple\\CA20240722_121002.xlsx"
 
 # Fonction pour récupérer les données à partir de la ligne spécifiée d'un fichier Excel
 def extract_data(file_path, n):
@@ -24,7 +24,7 @@ def extract_data(file_path, n):
             'Libellé': 'libelle'
         }, inplace=True)
         # Sauvegarder le fichier Excel modifié
-        df.to_excel(file_path, index=False)
+        df.to_excel("D:\\Travail pro\\Github repo\\Expense_tracking_project\\Fichier brut exemple\\test.xlsx", index=False)
     except Exception as e:
         print(f"Erreur lors de l'extraction des données : {e}", file=sys.stderr)
 
