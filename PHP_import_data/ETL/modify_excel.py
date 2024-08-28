@@ -39,8 +39,8 @@ def extract_data(config_path, file_path, file_name, n):
                 'Libellé': 'libelle'
             }, inplace=True)
 
-            df['date_depense'] = pd.to_datetime(df['date_depense'], format='%d-%m-%Y',errors='coerce')
-            df['libelle'] = df['libelle'].str[:250]
+            df['date_depense'] = pd.to_datetime(df['date_depense'], errors='coerce')
+            df['libelle'] = df['libelle'].str[:25]
             
 
             ###Inclure dans la base mysql, table depenses
