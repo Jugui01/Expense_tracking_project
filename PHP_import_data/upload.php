@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     $file = $_FILES['file'];
     $uploadDir = 'uploads/';
     $uploadFile = $uploadDir . basename($file['name']);
-    $uploadConfig = 'config.yaml';
+    $uploadConfig = 'Config/config.yaml';
 
     // Vérifier si le fichier a été téléchargé sans erreur
     if ($file['error'] == UPLOAD_ERR_OK) {
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
             echo "Le fichier " . basename($file['name']) . " a été téléchargé avec succès.<br>";
 
             // Commande pour exécuter le script Python
-            $command = escapeshellcmd("python main.py " . escapeshellarg($uploadFile) . " " . escapeshellarg($uploadConfig) . " " . escapeshellarg($file['name']));
+            $command = escapeshellcmd("python ETL/main.py " . escapeshellarg($uploadFile) . " " . escapeshellarg($uploadConfig) . " " . escapeshellarg($file['name']));
             $output = shell_exec($command . ' 2>&1'); // Capture les erreurs aussi
 
             // Afficher la sortie du script Python
