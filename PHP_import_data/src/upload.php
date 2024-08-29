@@ -1,9 +1,13 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     $file = $_FILES['file'];
-    $uploadDir = 'uploads/';
+    
+    // Chemin du dossier de téléchargement (public/uploads)
+    $uploadDir = '../public/uploads/';
     $uploadFile = $uploadDir . basename($file['name']);
-    $uploadConfig = 'Config/config.yaml';
+    
+    // Chemin vers le fichier de configuration (config/config.yaml)
+    $uploadConfig = '../config/config.yaml';
 
     // Vérifier si le fichier a été téléchargé sans erreur
     if ($file['error'] == UPLOAD_ERR_OK) {
@@ -17,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
             echo "Le fichier " . basename($file['name']) . " a été téléchargé avec succès.<br>";
 
             // Commande pour exécuter le script Python
-            $command = escapeshellcmd("python ETL/main.py " . escapeshellarg($uploadFile) . " " . escapeshellarg($uploadConfig) . " " . escapeshellarg($file['name']));
+            $command = escapeshellcmd("python ../etl/main.py " . escapeshellarg($uploadFile) . " " . escapeshellarg($uploadConfig) . " " . escapeshellarg($file['name']));
             $output = shell_exec($command . ' 2>&1'); // Capture les erreurs aussi
 
             // Afficher la sortie du script Python
@@ -27,7 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
                 echo "<pre>$output</pre>";
             }
 
-            echo "<a href='$uploadFile'>Télécharger le fichier modifié</a>";
+            // Lien pour télécharger le fichier modifié
+            $downloadPath = str_replace('../public/', '', $uploadFile);
+            echo "<a href='/$downloadPath'>Télécharger le fichier modifié</a>";
         } else {
             echo "Erreur lors du déplacement du fichier.";
         }

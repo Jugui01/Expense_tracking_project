@@ -84,7 +84,7 @@
 <body>
     <div class="container">
         <h1>Uploader un fichier Excel</h1>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="/src/upload.php" method="post" enctype="multipart/form-data">
             <label for="file">Sélectionner un fichier Excel :</label>
             <input type="file" name="file" id="file" accept=".xlsx">
             <input type="submit" value="Uploader">

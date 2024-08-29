@@ -40,7 +40,8 @@ def extract_data(config_path, file_path, file_name, n):
             }, inplace=True)
 
             df['date_depense'] = pd.to_datetime(df['date_depense'], errors='coerce')
-            df['libelle'] = df['libelle'].str[:25]
+            df['libelle'] = df['libelle'].str.replace(r'\s+', ' ', regex=True).str.strip()
+            df['libelle'] = df['libelle'].str[:30]
             
 
             ###Inclure dans la base mysql, table depenses
